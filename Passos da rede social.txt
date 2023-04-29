@@ -1,0 +1,43 @@
+CADASTRO DE PESSOA
+{
+	"id" : 0,
+	"nome" : "fulano",
+	"telefone" : "99 99999-9999",
+	"email" : "fulano@email.com",
+	"senha" : "123456",
+	"imagem" : "http://URI"
+}
+
+LOGIN
+{
+	"email" : "fulano@email.com"
+	"senha" : "123456"
+}
+
+VERIFICAR LOGIN
+{ verificar se login e senha estão corretos }
+
+POST
+{
+	"id" : 0,
+	"imagem" : "http://URI",
+	"texto" : "mensagem",
+	"dataHora" : 01/01/2000 00:00,
+	"like" : [{ 
+			"userId" : "0000"
+		}
+	]
+}
+	[COMENTARIO DO POST
+		{
+			"id" : 0,
+			"imagem" : "http://URI",
+			"texto" : "mensagem",
+			"dataHora" : 01/01/2000 00:00
+		}
+	]
+CURTIR POST ****
+
+PAGINA PERFIL ****
+
+PAGINA BUSCAR AMIGOS ****
