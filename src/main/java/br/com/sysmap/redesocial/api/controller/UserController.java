@@ -16,25 +16,26 @@ public class UserController {
     private IUserService iUserService;
 
     @PostMapping
-    public ResponseEntity<String> create(@RequestBody CreateUserRequest request){
+    public ResponseEntity<String> create(@RequestBody CreateUserRequest request) {
         var response = iUserService.create(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @GetMapping
-    public ResponseEntity<List<GetAllUsersRequest>> getAll(){
+    public ResponseEntity<List<GetAllUsersRequest>> getAll() {
         return ResponseEntity.ok(iUserService.getAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<GetUserByRequest> getById(@PathVariable UUID id){
+    public ResponseEntity<GetUserByRequest> getById(@PathVariable UUID id) {
         return ResponseEntity.ok(iUserService.getById(id));
     }
 
-    /*@PutMapping("/{id}")
-    public ResponseEntity<String> update(@PathVariable UUID id, @RequestBody CreateUserRequest request){
-        return ResponseEntity.ok(iUserService.update(id, request));
-    }*/
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> update(@PathVariable UUID id, @RequestBody UpdateUserRequest request) {
+        iUserService.update(id, request);
+        return ResponseEntity.ok().build();
+    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable UUID id) {

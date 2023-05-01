@@ -23,7 +23,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
                                                                   HttpHeaders headers, HttpStatus status, WebRequest request) {
         List<Properties> properties = new ArrayList<>();
 
-        for(ObjectError error: ex.getBindingResult().getAllErrors()) {
+        for (ObjectError error : ex.getBindingResult().getAllErrors()) {
             String nome = ((FieldError) error).getField();
             String mensagem = error.getDefaultMessage();
 
@@ -38,8 +38,9 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
         return handleExceptionInternal(ex, problema, headers, status, request);
     }
+
     @ExceptionHandler(DomainException.class)
-    public ResponseEntity<Object> handleDomain(DomainException ex, WebRequest request){
+    public ResponseEntity<Object> handleDomain(DomainException ex, WebRequest request) {
         HttpStatus status = HttpStatus.BAD_REQUEST;
 
         Problem problema = new Problem();
@@ -49,8 +50,9 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
         return handleExceptionInternal(ex, problema, new HttpHeaders(), status, request);
     }
+
     @ExceptionHandler(EntitieNotFoundException.class)
-    public ResponseEntity<Object> handleEntidadeNaoEncontrada(EntitieNotFoundException ex, WebRequest request){
+    public ResponseEntity<Object> handleEntidadeNaoEncontrada(EntitieNotFoundException ex, WebRequest request) {
         HttpStatus status = HttpStatus.NOT_FOUND;
 
         Problem problema = new Problem();
