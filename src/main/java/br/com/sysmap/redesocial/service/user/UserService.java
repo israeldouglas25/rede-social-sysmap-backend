@@ -27,7 +27,7 @@ public class UserService implements IUserService {
 
     @Override
     public String create(CreateUserRequest request) {
-        var user = new User(request.name, request.email, request.password, request.fone);
+        var user = new User(request.name, request.email, request.password);
         userRepository.save(user);
         return user.getId().toString();
     }

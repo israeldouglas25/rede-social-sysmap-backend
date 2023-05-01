@@ -14,14 +14,12 @@ public class User {
     private String name;
     private String email;
     private String password;
-    private String fone;
 
-    public User(String name, String email, String password, String fone) {
+    public User(String name, String email, String password) {
         this.setId();
         this.name = name;
         this.email = email;
         this.password = password;
-        this.fone = fone;
     }
 
     protected void setId() {

@@ -10,12 +10,10 @@ public class GetUserByRequest {
     private String name;
     private String email;
     private String password;
-    private String fone;
 
     public GetUserByRequest(User user){
         this.name = user.getName();
         this.email = user.getEmail();
-        this.fone = user.getFone();
         this.password = user.getPassword();
     }
 }
