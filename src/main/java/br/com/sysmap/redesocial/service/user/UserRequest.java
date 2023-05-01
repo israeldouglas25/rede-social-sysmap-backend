@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.UUID;
 
 @Data
-public class UpdateUserRequest {
+public class UserRequest {
     public UUID id;
     public String name;
     public String email;

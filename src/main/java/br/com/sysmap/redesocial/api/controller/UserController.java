@@ -1,6 +1,8 @@
 package br.com.sysmap.redesocial.api.controller;
 
-import br.com.sysmap.redesocial.service.user.*;
+import br.com.sysmap.redesocial.service.user.IUserService;
+import br.com.sysmap.redesocial.service.user.UserRequest;
+import br.com.sysmap.redesocial.service.user.UserResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,23 +18,23 @@ public class UserController {
     private IUserService iUserService;
 
     @PostMapping
-    public ResponseEntity<String> create(@RequestBody CreateUserRequest request) {
+    public ResponseEntity<String> create(@RequestBody UserRequest request) {
         var response = iUserService.create(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @GetMapping
-    public ResponseEntity<List<GetAllUsersRequest>> getAll() {
+    public ResponseEntity<List<UserResponse>> getAll() {
         return ResponseEntity.ok(iUserService.getAll());
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<GetUserByRequest> getById(@PathVariable UUID id) {
-        return ResponseEntity.ok(iUserService.getById(id));
+    @GetMapping("/{email}")
+    public ResponseEntity<UserResponse> getById(@PathVariable String email) {
+        return ResponseEntity.ok(iUserService.getByEmail(email));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> update(@PathVariable UUID id, @RequestBody UpdateUserRequest request) {
+    public ResponseEntity<Void> update(@PathVariable UUID id, @RequestBody UserRequest request) {
         iUserService.update(id, request);
         return ResponseEntity.ok().build();
     }

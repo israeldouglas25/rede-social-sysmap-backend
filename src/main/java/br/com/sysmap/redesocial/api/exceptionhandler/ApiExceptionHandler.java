@@ -1,7 +1,7 @@
 package br.com.sysmap.redesocial.api.exceptionhandler;
 
 import br.com.sysmap.redesocial.exception.DomainException;
-import br.com.sysmap.redesocial.exception.EntitieNotFoundException;
+import br.com.sysmap.redesocial.exception.EntitieException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -51,8 +51,8 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         return handleExceptionInternal(ex, problema, new HttpHeaders(), status, request);
     }
 
-    @ExceptionHandler(EntitieNotFoundException.class)
-    public ResponseEntity<Object> handleEntidadeNaoEncontrada(EntitieNotFoundException ex, WebRequest request) {
+    @ExceptionHandler(EntitieException.class)
+    public ResponseEntity<Object> handleEntidadeNaoEncontrada(EntitieException ex, WebRequest request) {
         HttpStatus status = HttpStatus.NOT_FOUND;
 
         Problem problema = new Problem();

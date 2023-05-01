@@ -4,13 +4,13 @@ import java.util.List;
 import java.util.UUID;
 
 public interface IUserService {
-    String create(CreateUserRequest request);
+    String create(UserRequest request);
 
-    List<GetAllUsersRequest> getAll();
+    List<UserResponse> getAll();
 
-    GetUserByRequest getById(UUID id);
+    UserResponse getByEmail(String email);
 
     void delete(UUID id);
 
-    void update(UUID id, UpdateUserRequest request);
+    void update(UUID id, UserRequest request);
 }

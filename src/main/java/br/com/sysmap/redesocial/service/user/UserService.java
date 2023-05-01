@@ -2,8 +2,7 @@ package br.com.sysmap.redesocial.service.user;
 
 import br.com.sysmap.redesocial.data.entities.User;
 import br.com.sysmap.redesocial.data.repository.IUserRepository;
-import br.com.sysmap.redesocial.exception.DomainException;
-import br.com.sysmap.redesocial.exception.EntitieNotFoundException;
+import br.com.sysmap.redesocial.exception.EntitieException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,18 +15,23 @@ public class UserService implements IUserService {
     private IUserRepository userRepository;
 
     @Override
-    public List<GetAllUsersRequest> getAll() {
-        return userRepository.findAll().stream().map(GetAllUsersRequest::new).toList();
+    public List<UserResponse> getAll() {
+        return userRepository.findAll().stream().map(UserResponse::new).toList();
     }
 
     @Override
-    public GetUserByRequest getById(UUID id) {
-        var user = userRepository.findById(id).orElseThrow(() -> new EntitieNotFoundException("User not found!"));
-        return new GetUserByRequest(user);
+    public UserResponse getByEmail(String email) {
+        User byEmail = userRepository.findByEmail(email);
+        if (byEmail != null) {
+            return new UserResponse(byEmail);
+        } else {
+            throw new EntitieException("Email not found!");
+        }
+
     }
 
     @Override
-    public String create(CreateUserRequest request) {
+    public String create(UserRequest request) {
         var user = new User(request.name, request.email, request.password);
         userRepository.save(user);
         return user.getId().toString();
@@ -36,22 +40,19 @@ public class UserService implements IUserService {
     @Override
     public void delete(UUID id) {
         if (!userRepository.existsById(id)) {
-            throw new EntitieNotFoundException("User not found!");
+            throw new EntitieException("User not found!");
         }
         userRepository.deleteById(id);
     }
 
     @Override
-    public void update(UUID id, UpdateUserRequest request) {
-        var userDb = userRepository.findById(id).orElseThrow(() -> new EntitieNotFoundException("User not found!"));
-        if (userDb.getId().equals(request.getId())) {
-            userDb.setId(id);
-            userDb.setName(request.getName());
-            userDb.setEmail(request.getEmail());
-            userDb.setPassword(request.getPassword());
-            userRepository.save(userDb);
-        } else {
-            throw new DomainException("different ids!");
-        }
+    public void update(UUID id, UserRequest request) {
+        var userDb = userRepository.findById(id).orElseThrow(() -> new EntitieException("User not found!"));
+        userDb.setId(id);
+        userDb.setName(request.getName());
+        userDb.setEmail(request.getEmail());
+        userDb.setPassword(request.getPassword());
+        userRepository.save(userDb);
+
     }
 }
