@@ -3,6 +3,7 @@ package br.com.sysmap.redesocial.api.controller;
 import br.com.sysmap.redesocial.service.user.IUserService;
 import br.com.sysmap.redesocial.service.user.UserRequest;
 import br.com.sysmap.redesocial.service.user.UserResponse;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ public class UserController {
     private IUserService iUserService;
 
     @PostMapping
-    public ResponseEntity<String> create(@RequestBody UserRequest request) {
+    public ResponseEntity<String> create(@Valid @RequestBody UserRequest request) {
         var response = iUserService.create(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
@@ -34,9 +35,9 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> update(@PathVariable UUID id, @RequestBody UserRequest request) {
+    public ResponseEntity<Void> update(@Valid @PathVariable UUID id, @RequestBody UserRequest request) {
         iUserService.update(id, request);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.accepted().build();
     }
 
     @DeleteMapping("/{id}")

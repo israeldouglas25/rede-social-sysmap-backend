@@ -21,20 +21,24 @@ public class UserService implements IUserService {
 
     @Override
     public UserResponse getByEmail(String email) {
-        User byEmail = userRepository.findByEmail(email);
+        var byEmail = userRepository.findByEmail(email);
         if (byEmail != null) {
             return new UserResponse(byEmail);
         } else {
             throw new EntitieException("Email not found!");
         }
-
     }
 
     @Override
     public String create(UserRequest request) {
-        var user = new User(request.name, request.email, request.password);
-        userRepository.save(user);
-        return user.getId().toString();
+        var byEmail = userRepository.findByEmail(request.getEmail());
+        if (byEmail != null) {
+            throw new EntitieException("email already exists!");
+        } else {
+            var user = new User(request.name, request.email, request.password);
+            userRepository.save(user);
+            return user.getId().toString();
+        }
     }
 
     @Override
@@ -53,6 +57,5 @@ public class UserService implements IUserService {
         userDb.setEmail(request.getEmail());
         userDb.setPassword(request.getPassword());
         userRepository.save(userDb);
-
     }
 }
