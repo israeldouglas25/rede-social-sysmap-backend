@@ -30,6 +30,14 @@ public class UserService implements IUserService {
     }
 
     @Override
+    public void delete(UUID id) {
+        if (!userRepository.existsById(id)) {
+            throw new EntitieException("User not found!");
+        }
+        userRepository.deleteById(id);
+    }
+
+    @Override
     public String create(UserRequest request) {
         var byEmail = userRepository.findByEmail(request.getEmail());
         if (byEmail != null) {
@@ -39,14 +47,6 @@ public class UserService implements IUserService {
             userRepository.save(user);
             return user.getId().toString();
         }
-    }
-
-    @Override
-    public void delete(UUID id) {
-        if (!userRepository.existsById(id)) {
-            throw new EntitieException("User not found!");
-        }
-        userRepository.deleteById(id);
     }
 
     @Override

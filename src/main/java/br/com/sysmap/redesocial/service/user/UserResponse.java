@@ -13,11 +13,13 @@ public class UserResponse {
     private String name;
     private String email;
     private String password;
+    private String photo;
 
     public UserResponse(User user){
         this.id = user.getId();
         this.name = user.getName();
         this.email = user.getEmail();
         this.password = user.getPassword();
+        this.photo = user.getPhoto();
     }
 }

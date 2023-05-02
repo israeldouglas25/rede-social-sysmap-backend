@@ -2,10 +2,10 @@ CADASTRO DE PESSOA
 {
 	"id" : 0,
 	"nome" : "fulano",
-	"telefone" : "99 99999-9999",
 	"email" : "fulano@email.com",
 	"senha" : "123456",
 	"imagem" : "http://URI"
+	"dataHora" : "2000/01/01 - 13:00:00"
 }
 
 LOGIN

@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 
+import java.time.OffsetDateTime;
 import java.util.UUID;
 
 @NoArgsConstructor
@@ -14,16 +15,24 @@ public class User {
     private String name;
     private String email;
     private String password;
+    private String photo;
+    private OffsetDateTime createdAt;
 
     public User(String name, String email, String password) {
         this.setId();
         this.name = name;
         this.email = email;
         this.password = password;
+        this.setPhoto();
+        this.createdAt = OffsetDateTime.now();
     }
 
     protected void setId() {
         this.id = id.randomUUID();
+    }
+
+    public void setPhoto() {
+        this.photo = "https://static.vecteezy.com/ti/vetor-gratis/t2/550731-de-icone-de-usuario-gratis-vetor.jpg";
     }
 
     public UUID getId() {
