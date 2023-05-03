@@ -26,7 +26,7 @@ public class PostController {
     }
 
     @GetMapping("/{userId}")
-    public ResponseEntity<List<PostResponse>> getAllByUser(@PathVariable UUID userId){
+    public ResponseEntity<List<PostResponse>> getAllByUser(@PathVariable UUID userId) {
         return ResponseEntity.ok(iPostService.getAllByUser(userId));
     }
 

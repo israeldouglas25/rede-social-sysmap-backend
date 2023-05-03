@@ -5,6 +5,8 @@ import java.util.UUID;
 
 public interface IPostService {
     String create(PostRequest request);
+
     List<PostResponse> getAllByUser(UUID userId);
+
     void delete(UUID id);
 }
