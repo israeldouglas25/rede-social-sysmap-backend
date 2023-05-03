@@ -3,8 +3,8 @@ package br.com.sysmap.redesocial.data.entities;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 
+import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.UUID;
@@ -14,23 +14,25 @@ import java.util.UUID;
 public class Post {
     @Id
     private UUID id;
-    @DBRef
-    private User userId;
-    private String title;
+    private UUID userId;
     private String description;
-    private OffsetDateTime createdAt;
-    @DBRef
+    private LocalDateTime createdAt = LocalDateTime.now();
     private List<Comment> comments;
+    private List<Like> likes;
 
-    public Post(String title, String description) {
+    public Post(UUID userId, String description) {
         this.id = UUID.randomUUID();
-        this.title = title;
+        this.userId = userId;
         this.description = description;
-        this.createdAt = OffsetDateTime.now();
     }
 
     public List<Comment> addComment(Comment comment) {
         this.comments.add(comment);
         return this.comments;
+    }
+
+    public List<Like> addLike(Like like) {
+        this.likes.add(like);
+        return this.likes;
     }
 }
