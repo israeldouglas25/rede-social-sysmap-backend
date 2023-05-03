@@ -6,7 +6,9 @@ documentação será utilizado o Swagger.
 ## 🛑 Pré-Requisitos
 ✅ Java JDK 17 </br >
 ✅ IDE para desenvolvimento Java </br >
-✅ Spring boot 3.0.6 </br >
+✅ Spring boot 3+ </br >
+✅ Banco dados MongoDB </br >
+✅ Docker </br >
 
 ## 👣 Passo-a-Passo
 BACK-END
@@ -21,4 +23,4 @@ persistência, onde a classe estende a interface MongoRepository para utilizaç�
 5. A documentação foi criada com SWAGGER 3, onde foi aplicada apenas às dependências do SWAGGER 3 no pom.xml para descrever a API RESTFul usando JSON.
 
 ## 👏 Conclusão
-Neste projeto foi possível aplicar técnicas de desenvolvimento web através de uma API RESTFul no BACK-END.
+Neste projeto foi possível aplicar técnicas de desenvolvimento web através de uma API RESTFul.
