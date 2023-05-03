@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 
+import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
@@ -16,7 +17,7 @@ public class User {
     private String email;
     private String password;
     private String photo;
-    private OffsetDateTime createdAt;
+    private LocalDateTime createdAt = LocalDateTime.now();
 
     public User(String name, String email, String password) {
         this.setId();
@@ -24,7 +25,6 @@ public class User {
         this.email = email;
         this.password = password;
         this.setPhoto();
-        this.createdAt = OffsetDateTime.now();
     }
 
     protected void setId() {

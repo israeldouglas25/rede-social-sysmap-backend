@@ -20,6 +20,5 @@ public class UserRequest {
     @NotBlank(message = "Digite uma senha")
     @Size(min = 6, max = 20, message = "Mínimo de 6 e máximo de 20 caracter!")
     public String password;
-    public String photo;
 
 }
