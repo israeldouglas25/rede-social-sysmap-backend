@@ -1,5 +1,7 @@
 package br.com.sysmap.redesocial.api.controller;
 
+import br.com.sysmap.redesocial.data.entities.Comment;
+import br.com.sysmap.redesocial.data.entities.Like;
 import br.com.sysmap.redesocial.service.post.IPostService;
 import br.com.sysmap.redesocial.service.post.PostRequest;
 import br.com.sysmap.redesocial.service.post.PostResponse;
@@ -39,5 +41,17 @@ public class PostController {
     public ResponseEntity<Void> delete(@PathVariable UUID id) {
         iPostService.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/comment/{comment}")
+    public ResponseEntity<Void> addComment(@RequestBody Comment request){
+        iPostService.addComent(request);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @PostMapping("/like/{like}")
+    public ResponseEntity<Void> addLike(@RequestBody Like like){
+        iPostService.addLike(like);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }

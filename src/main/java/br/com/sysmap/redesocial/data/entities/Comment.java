@@ -1,5 +1,6 @@
 package br.com.sysmap.redesocial.data.entities;
 
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,6 +12,7 @@ import java.util.UUID;
 public class Comment {
     private UUID userId;
     private UUID postId;
+    @NotEmpty(message = "Não pode ser vazio!")
     private String description;
     private LocalDateTime createdAt = LocalDateTime.now();
 

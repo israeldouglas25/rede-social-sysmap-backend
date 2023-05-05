@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -16,8 +17,8 @@ public class Post {
     private UUID userId;
     private String description;
     private LocalDateTime createdAt = LocalDateTime.now();
-    private List<Comment> comments;
-    private List<Like> likes;
+    private List<Comment> comments = new ArrayList<>();
+    private List<Like> likes = new ArrayList<>();
 
     public Post(UUID userId, String description) {
         this.id = UUID.randomUUID();
