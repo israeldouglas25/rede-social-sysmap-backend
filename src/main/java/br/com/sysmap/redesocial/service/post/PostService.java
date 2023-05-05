@@ -28,6 +28,10 @@ public class PostService implements IPostService {
         }
     }
 
+    public List<PostResponse> getAll(){
+        return postRepository.findAll().stream().map(PostResponse::new).toList();
+    }
+
     @Override
     public List<PostResponse> getAllByUser(UUID userId) {
         return postRepository.findAll()

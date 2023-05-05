@@ -25,6 +25,11 @@ public class PostController {
         return ResponseEntity.status(HttpStatus.CREATED).body(postResponse);
     }
 
+    @GetMapping
+    public ResponseEntity<List<PostResponse>> getAll(){
+        return ResponseEntity.ok(iPostService.getAll());
+    }
+
     @GetMapping("/{userId}")
     public ResponseEntity<List<PostResponse>> getAllByUser(@PathVariable UUID userId) {
         return ResponseEntity.ok(iPostService.getAllByUser(userId));
