@@ -1,8 +1,6 @@
 package br.com.sysmap.redesocial.api.controller;
 
-import br.com.sysmap.redesocial.service.user.IUserService;
-import br.com.sysmap.redesocial.service.user.UserRequest;
-import br.com.sysmap.redesocial.service.user.UserResponse;
+import br.com.sysmap.redesocial.service.user.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,6 +27,11 @@ public class UserController {
         return ResponseEntity.ok(iUserService.getAll());
     }
 
+    @GetMapping("/friends")
+    public ResponseEntity<List<UserFriendsResponse>> getAllUser() {
+        return ResponseEntity.ok(iUserService.getAllFriends());
+    }
+
     @GetMapping("/{email}")
     public ResponseEntity<UserResponse> getById(@PathVariable String email) {
         return ResponseEntity.ok(iUserService.getByEmail(email));
@@ -37,7 +40,13 @@ public class UserController {
     @PutMapping("/{id}")
     public ResponseEntity<Void> update(@Valid @PathVariable UUID id, @RequestBody UserRequest request) {
         iUserService.update(id, request);
-        return ResponseEntity.accepted().build();
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/{userId}/follow")
+    public ResponseEntity<Void> followUser(@PathVariable UUID userId, @RequestBody UserFollowingRequest request) {
+        iUserService.followUser(userId, request);
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{id}")

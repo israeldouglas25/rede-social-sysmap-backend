@@ -9,11 +9,16 @@ public interface IUserService {
     String create(UserRequest request);
 
     List<UserResponse> getAll();
+    List<UserFriendsResponse> getAllFriends();
 
     UserResponse getByEmail(String email);
+
+    User getById(UUID id);
+
+    void followUser(UUID userId, UserFollowingRequest followId);
 
     void delete(UUID id);
 
     void update(UUID id, UserRequest request);
-    User getById(UUID id);
+
 }

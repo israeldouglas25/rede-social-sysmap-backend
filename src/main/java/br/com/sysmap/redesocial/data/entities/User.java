@@ -5,7 +5,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 
 import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @NoArgsConstructor
@@ -17,6 +18,8 @@ public class User {
     private String email;
     private String password;
     private String photo;
+    private List<UUID> following = new ArrayList<>();
+    private List<UUID> followers = new ArrayList<>();
     private LocalDateTime createdAt = LocalDateTime.now();
 
     public User(String name, String email, String password) {
@@ -37,5 +40,14 @@ public class User {
 
     public UUID getId() {
         return id;
+    }
+
+    public void followUser(UUID userId){
+        if(following.contains(userId)) {
+            following.remove(userId);
+        }
+        else {
+            this.following.add(userId);
+        }
     }
 }

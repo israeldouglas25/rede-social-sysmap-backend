@@ -12,7 +12,9 @@ public interface IPostService {
     List<PostResponse> getAll();
 
     List<PostResponse> getAllByUser(UUID userId);
+
     void addComent(Comment comentRequest);
+
     void addLike(Like likeRequest);
 
     void delete(UUID id);

@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -21,6 +20,15 @@ public class UserService implements IUserService {
     }
 
     @Override
+    public List<UserFriendsResponse> getAllFriends() {
+        return userRepository.findAll()
+                .stream()
+                .filter(user -> !user.getFollowing().contains(user.getId()))
+                .map(UserFriendsResponse::new)
+                .toList();
+    }
+
+    @Override
     public UserResponse getByEmail(String email) {
         var byEmail = userRepository.findByEmail(email);
         if (byEmail != null) {
@@ -29,9 +37,17 @@ public class UserService implements IUserService {
             throw new EntitieException("Email not found!");
         }
     }
+
     @Override
-    public User getById(UUID id){
-        return userRepository.findById(id).orElseThrow(()-> new EntitieException("User not found!"));
+    public User getById(UUID id) {
+        return userRepository.findById(id).orElseThrow(() -> new EntitieException("User not found!"));
+    }
+
+    @Override
+    public void followUser(UUID userId, UserFollowingRequest request) {
+        User userById = getById(userId);
+        userById.followUser(request.userId);
+        userRepository.save(userById);
     }
 
     @Override
