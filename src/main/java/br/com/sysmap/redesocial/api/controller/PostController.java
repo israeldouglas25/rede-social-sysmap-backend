@@ -43,15 +43,15 @@ public class PostController {
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("/comment/{comment}")
+    @PutMapping("/comment/{comment}")
     public ResponseEntity<Void> addComment(@RequestBody Comment request){
         iPostService.addComent(request);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/like/{like}")
+    @PutMapping("/like/{like}")
     public ResponseEntity<Void> addLike(@RequestBody Like like){
         iPostService.addLike(like);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity.ok().build();
     }
 }
