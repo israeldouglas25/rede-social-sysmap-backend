@@ -2,9 +2,7 @@ package br.com.sysmap.redesocial.api.controller;
 
 import br.com.sysmap.redesocial.data.entities.Comment;
 import br.com.sysmap.redesocial.data.entities.Like;
-import br.com.sysmap.redesocial.service.post.IPostService;
-import br.com.sysmap.redesocial.service.post.PostRequest;
-import br.com.sysmap.redesocial.service.post.PostResponse;
+import br.com.sysmap.redesocial.service.post.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,16 +35,15 @@ public class PostController {
         return ResponseEntity.ok(iPostService.getAllByUser(userId));
     }
 
+    @PutMapping("/comment/{comment}")
+    public ResponseEntity<CommentResponse> addComment(@RequestBody CommentRequest request){
+        return ResponseEntity.ok(iPostService.addComent(request));
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable UUID id) {
         iPostService.delete(id);
         return ResponseEntity.noContent().build();
-    }
-
-    @PutMapping("/comment/{comment}")
-    public ResponseEntity<Void> addComment(@RequestBody Comment request){
-        iPostService.addComent(request);
-        return ResponseEntity.ok().build();
     }
 
     @PutMapping("/like/{like}")

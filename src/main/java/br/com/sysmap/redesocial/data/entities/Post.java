@@ -16,7 +16,7 @@ public class Post {
     private UUID id;
     private UUID userId;
     private String description;
-    private LocalDateTime createdAt = LocalDateTime.now();
+    private LocalDateTime createdAt;
     private List<Comment> comments = new ArrayList<>();
     private List<Like> likes = new ArrayList<>();
 
@@ -24,15 +24,18 @@ public class Post {
         this.id = UUID.randomUUID();
         this.userId = userId;
         this.description = description;
+        this.createdAt = LocalDateTime.now();
     }
 
-    public List<Comment> addComment(Comment comment) {
+    public void addComment(Comment comment) {
         this.comments.add(comment);
-        return this.comments;
     }
 
-    public List<Like> addLike(Like like) {
-        this.likes.add(like);
-        return this.likes;
+    public void likePost(Like like) {
+        if (likes.contains(like)) {
+            likes.remove(like);
+        } else {
+            this.likes.add(like);
+        }
     }
 }

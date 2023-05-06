@@ -20,33 +20,25 @@ public class User {
     private String photo;
     private List<UUID> following = new ArrayList<>();
     private List<UUID> followers = new ArrayList<>();
-    private LocalDateTime createdAt = LocalDateTime.now();
+    private LocalDateTime createdAt;
 
     public User(String name, String email, String password) {
-        this.setId();
+        this.id = UUID.randomUUID();
         this.name = name;
         this.email = email;
         this.password = password;
         this.setPhoto();
-    }
-
-    protected void setId() {
-        this.id = id.randomUUID();
+        this.createdAt = LocalDateTime.now();
     }
 
     public void setPhoto() {
         this.photo = "https://static.vecteezy.com/ti/vetor-gratis/t2/550731-de-icone-de-usuario-gratis-vetor.jpg";
     }
 
-    public UUID getId() {
-        return id;
-    }
-
-    public void followUser(UUID userId){
-        if(following.contains(userId)) {
+    public void followUser(UUID userId) {
+        if (following.contains(userId)) {
             following.remove(userId);
-        }
-        else {
+        } else {
             this.following.add(userId);
         }
     }

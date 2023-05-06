@@ -31,6 +31,7 @@ public class PostService implements IPostService {
         }
     }
 
+    @Override
     public List<PostResponse> getAll(){
         return postRepository.findAll()
                 .stream()
@@ -48,15 +49,20 @@ public class PostService implements IPostService {
     }
 
     @Override
-    public void addComent(Comment commentRequest){
-        Post postById = postRepository.findById(commentRequest.getPostId())
+    public Post getById(UUID postId){
+        return postRepository.findById(postId)
                 .orElseThrow(() -> new EntitieException("Post not found!"));
+    }
 
+    @Override
+    public CommentResponse addComent(CommentRequest commentRequest){
         User userById = userService.getById(commentRequest.getUserId());
         if (userById != null) {
+            Post postById = getById(commentRequest.getPostId());
             var newComment = new Comment(commentRequest.getUserId(), commentRequest.getPostId(), commentRequest.getDescription());
             postById.addComment(newComment);
             postRepository.save(postById);
+            return new CommentResponse(newComment);
         }else {
             throw new EntitieException("User not found!");
         }
@@ -64,17 +70,9 @@ public class PostService implements IPostService {
 
     @Override
     public void addLike(Like likeRequest){
-        Post postById = postRepository.findById(likeRequest.getPostId())
-                .orElseThrow(() -> new EntitieException("Post not found!"));
-
-        User userById = userService.getById(likeRequest.getUserId());
-        if (userById != null){
-            var newlike = new Like(likeRequest.getUserId(), likeRequest.getPostId());
-            postById.addLike(newlike);
-            postRepository.save(postById);
-        }else {
-            throw new EntitieException("User not found!");
-        }
+        Post postById = getById(likeRequest.getPostId());
+        postById.likePost(likeRequest);
+        postRepository.save(postById);
     }
 
     @Override

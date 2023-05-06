@@ -26,9 +26,12 @@ public class Comment {
         this.likes = new ArrayList<>();
     }
 
-    public List<Like> addLike(Like like) {
-        this.likes.add(like);
-        return this.likes;
+    public void likeComment(Like like) {
+        if (likes.contains(like)) {
+            likes.remove(like);
+        } else {
+            this.likes.add(like);
+        }
     }
 
 }
