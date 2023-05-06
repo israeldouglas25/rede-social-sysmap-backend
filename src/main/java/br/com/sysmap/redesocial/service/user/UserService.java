@@ -16,7 +16,10 @@ public class UserService implements IUserService {
 
     @Override
     public List<UserResponse> getAll() {
-        return userRepository.findAll().stream().map(UserResponse::new).toList();
+        return userRepository.findAll()
+                .stream()
+                .map(UserResponse::new)
+                .toList();
     }
 
     @Override
