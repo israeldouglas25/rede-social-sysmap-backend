@@ -43,7 +43,8 @@ public class UserService implements IUserService {
 
     @Override
     public User getById(UUID id) {
-        return userRepository.findById(id).orElseThrow(() -> new EntitieException("User not found!"));
+        return userRepository.findById(id)
+                .orElseThrow(() -> new EntitieException("User not found!"));
     }
 
     @Override
@@ -75,7 +76,8 @@ public class UserService implements IUserService {
 
     @Override
     public void update(UUID id, UserRequest request) {
-        var userDb = userRepository.findById(id).orElseThrow(() -> new EntitieException("User not found!"));
+        var userDb = userRepository.findById(id)
+                .orElseThrow(() -> new EntitieException("User not found!"));
         userDb.setId(id);
         userDb.setName(request.getName());
         userDb.setEmail(request.getEmail());
