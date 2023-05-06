@@ -59,10 +59,10 @@ public class PostService implements IPostService {
         User userById = userService.getById(commentRequest.getUserId());
         if (userById != null) {
             Post postById = getById(commentRequest.getPostId());
-            var newComment = new Comment(commentRequest.getUserId(), commentRequest.getPostId(), commentRequest.getDescription());
-            postById.addComment(newComment);
+            var comment = new Comment(commentRequest.getUserId(), commentRequest.getPostId(), commentRequest.getDescription());
+            postById.addComment(comment);
             postRepository.save(postById);
-            return new CommentResponse(newComment);
+            return new CommentResponse(comment);
         }else {
             throw new EntitieException("User not found!");
         }
