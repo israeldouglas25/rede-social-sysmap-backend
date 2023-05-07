@@ -1,11 +1,13 @@
 package br.com.sysmap.redesocial.service.post;
 
-import br.com.sysmap.redesocial.data.entities.Comment;
-import br.com.sysmap.redesocial.data.entities.Like;
+import br.com.sysmap.redesocial.data.embedded.Comment;
+import br.com.sysmap.redesocial.data.embedded.Like;
 import br.com.sysmap.redesocial.data.entities.Post;
 import br.com.sysmap.redesocial.data.entities.User;
 import br.com.sysmap.redesocial.data.repository.IPostRepository;
 import br.com.sysmap.redesocial.exception.EntitieException;
+import br.com.sysmap.redesocial.service.post.comment.CommentRequest;
+import br.com.sysmap.redesocial.service.post.comment.CommentResponse;
 import br.com.sysmap.redesocial.service.user.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

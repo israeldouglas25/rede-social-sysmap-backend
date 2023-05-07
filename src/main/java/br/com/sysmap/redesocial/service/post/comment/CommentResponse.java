@@ -1,7 +1,7 @@
-package br.com.sysmap.redesocial.service.post;
+package br.com.sysmap.redesocial.service.post.comment;
 
-import br.com.sysmap.redesocial.data.entities.Comment;
-import br.com.sysmap.redesocial.data.entities.Like;
+import br.com.sysmap.redesocial.data.embedded.Comment;
+import br.com.sysmap.redesocial.data.embedded.Like;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

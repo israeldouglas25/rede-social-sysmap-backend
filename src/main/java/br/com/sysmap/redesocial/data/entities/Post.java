@@ -1,5 +1,7 @@
 package br.com.sysmap.redesocial.data.entities;
 
+import br.com.sysmap.redesocial.data.embedded.Comment;
+import br.com.sysmap.redesocial.data.embedded.Like;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;

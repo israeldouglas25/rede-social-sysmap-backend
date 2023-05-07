@@ -1,4 +1,4 @@
-package br.com.sysmap.redesocial.data.entities;
+package br.com.sysmap.redesocial.data.embedded;
 
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;

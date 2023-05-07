@@ -1,4 +1,4 @@
-package br.com.sysmap.redesocial.data.entities;
+package br.com.sysmap.redesocial.data.embedded;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
