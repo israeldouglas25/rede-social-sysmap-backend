@@ -4,6 +4,7 @@ import br.com.sysmap.redesocial.data.entities.User;
 import br.com.sysmap.redesocial.data.repository.IUserRepository;
 import br.com.sysmap.redesocial.exception.EntitieException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,6 +14,8 @@ import java.util.UUID;
 public class UserService implements IUserService {
     @Autowired
     private IUserRepository userRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public List<UserResponse> getAll() {
@@ -39,6 +42,10 @@ public class UserService implements IUserService {
         } else {
             throw new EntitieException("Email not found!");
         }
+    }
+
+    public User getUser(String email){
+        return userRepository.findByEmail(email);
     }
 
     @Override
@@ -68,7 +75,9 @@ public class UserService implements IUserService {
         if (byEmail != null) {
             throw new EntitieException("email already exists!");
         } else {
-            var user = new User(request.name, request.email, request.password);
+            var user = new User(request.name, request.email);
+            var hash = passwordEncoder.encode(request.password);
+            user.setPassword(hash);
             userRepository.save(user);
             return user.getId().toString();
         }

@@ -22,11 +22,10 @@ public class User {
     private List<UUID> followers = new ArrayList<>();
     private LocalDateTime createdAt;
 
-    public User(String name, String email, String password) {
+    public User(String name, String email) {
         this.id = UUID.randomUUID();
         this.name = name;
         this.email = email;
-        this.password = password;
         this.setPhoto();
         this.createdAt = LocalDateTime.now();
     }

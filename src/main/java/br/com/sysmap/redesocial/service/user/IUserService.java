@@ -14,6 +14,7 @@ public interface IUserService {
     UserResponse getByEmail(String email);
 
     User getById(UUID id);
+    User getUser(String email);
 
     void followUser(UUID userId, UserFollowingRequest followId);
 

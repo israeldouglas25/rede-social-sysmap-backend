@@ -16,7 +16,7 @@ public class UserController {
     @Autowired
     private IUserService iUserService;
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<String> create(@Valid @RequestBody UserRequest request) {
         var response = iUserService.create(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
