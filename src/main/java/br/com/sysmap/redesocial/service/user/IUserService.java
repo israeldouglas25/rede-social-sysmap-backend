@@ -1,6 +1,7 @@
 package br.com.sysmap.redesocial.service.user;
 
 import br.com.sysmap.redesocial.data.entities.User;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.UUID;
@@ -21,5 +22,7 @@ public interface IUserService {
     void delete(UUID id);
 
     void update(UUID id, UserRequest request);
+
+    void uploadPhotoProfile(MultipartFile photo);
 
 }

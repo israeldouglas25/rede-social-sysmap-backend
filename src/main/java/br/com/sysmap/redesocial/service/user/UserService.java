@@ -2,10 +2,14 @@ package br.com.sysmap.redesocial.service.user;
 
 import br.com.sysmap.redesocial.data.entities.User;
 import br.com.sysmap.redesocial.data.repository.IUserRepository;
+import br.com.sysmap.redesocial.exception.DomainException;
 import br.com.sysmap.redesocial.exception.EntitieException;
+import br.com.sysmap.redesocial.service.fileupload.IFileUploadService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.UUID;
@@ -16,6 +20,8 @@ public class UserService implements IUserService {
     private IUserRepository userRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private IFileUploadService fileUploadService;
 
     @Override
     public List<UserResponse> getAll() {
@@ -44,7 +50,8 @@ public class UserService implements IUserService {
         }
     }
 
-    public User getUser(String email){
+    @Override
+    public User getUser(String email) {
         return userRepository.findByEmail(email);
     }
 
@@ -92,5 +99,21 @@ public class UserService implements IUserService {
         userDb.setEmail(request.getEmail());
         userDb.setPassword(request.getPassword());
         userRepository.save(userDb);
+    }
+
+    public void uploadPhotoProfile(MultipartFile photo) {
+        var user = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+
+        var photoUri = "";
+
+        try {
+            var fileName = user.getId() + "." + photo.getOriginalFilename().substring(photo.getOriginalFilename().lastIndexOf(".") + 1);
+            photoUri = fileUploadService.upload(photo, fileName);
+        }catch (Exception e){
+            throw new RuntimeException(e.getMessage());
+        }
+
+        user.setPhoto(photoUri);
+        userRepository.save(user);
     }
 }

@@ -1,11 +1,13 @@
 package br.com.sysmap.redesocial.api.controller;
 
+import br.com.sysmap.redesocial.exception.DomainException;
 import br.com.sysmap.redesocial.service.user.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.UUID;
@@ -53,6 +55,15 @@ public class UserController {
     public ResponseEntity<Void> delete(@PathVariable UUID id) {
         iUserService.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    public ResponseEntity uploadPhotoProfile(@RequestParam("photo")MultipartFile photo){
+        try {
+            iUserService.uploadPhotoProfile(photo);
+            return new ResponseEntity(HttpStatus.OK);
+        }catch (DomainException e){
+            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 
 }
