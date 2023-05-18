@@ -57,6 +57,7 @@ public class UserController {
         return ResponseEntity.noContent().build();
     }
 
+    @PostMapping("/photo/update")
     public ResponseEntity uploadPhotoProfile(@RequestParam("photo")MultipartFile photo){
         try {
             iUserService.uploadPhotoProfile(photo);

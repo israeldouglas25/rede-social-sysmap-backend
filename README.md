@@ -21,6 +21,39 @@ customizar o retorno das mensagens.;
 persistência, onde a classe estende a interface MongoRepository para utilização de recursos específicos como CRUD.
 4. No pacote SERVICE foi criada a configuração para requisições, retornos e interface implementada para retorno da CONTROLLER.
 5. A documentação foi criada com SWAGGER 3, onde foi aplicada apenas às dependências do SWAGGER 3 no pom.xml para descrever a API RESTFul usando JSON.
+6. Para subir a imagem do usuário utilizei um serviço de emulação em nuvem local chamado localstack, onde ele oferece diversas funcionalidades para testar offline a aplicação em nuvem sem servidor.
+7. Foi utilizado o Docker para empacotar a aplicação.
+
+## 📦 Para executar o projeto
+```shell
+docker compose up -d
+```
+## 📝 Documentação
+
+A documentação da API está disponível no Swagger:
+
+http://localhost:8080/swagger-ui/index.html
+
+### Localstack
+
+Configurar o localstack:
+
+```shell
+docker exec -it localstack bash
+
+aws configure --profile default
+
+AWS Access Key ID [None]: mykey
+AWS Secret Access Key [None]: mykey
+Default region name [None]: us-east-2
+Default output format [None]: json
+```
+
+Criando o bucket:
+
+```shell
+aws s3 mb s3://parrot-bucket --endpoint-url=http://localhost:4566 
+```
 
 ## 👏 Conclusão
 Neste projeto foi possível aplicar técnicas de desenvolvimento web através de uma API RESTFul.

@@ -10,7 +10,7 @@
     </parent>
     <groupId>br.com.sysmap</groupId>
     <artifactId>rede-social</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <name>rede-social</name>
     <description>Projeto de uma rede social para o bootcamp da sysmap</description>
     <properties>
